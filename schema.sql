@@ -14,9 +14,16 @@ create table if not exists public.students (
  class_id uuid not null references public.classes(id),
  student_code text,
  name text not null,
+ nisn text,
+ nis text,
+ gender text check (gender is null or gender in ('L','P')),
  active boolean not null default true,
  created_at timestamptz not null default now()
 );
+alter table public.students add column if not exists nisn text;
+alter table public.students add column if not exists nis text;
+alter table public.students add column if not exists gender text;
+create unique index if not exists students_nisn_unique_nonempty on public.students(nisn) where nisn is not null and nisn <> '';
 create unique index if not exists students_code_unique_nonempty on public.students(student_code) where student_code is not null and student_code <> '';
 create table if not exists public.lessons (
  id uuid primary key default gen_random_uuid(),
@@ -88,6 +95,6 @@ begin
  end loop;
 end $$;
 
--- Isi 11 kelas melalui impor Excel (nama sheet menjadi nama kelas).
+-- Isi 11 kelas melalui impor Excel (nama sheet menjadi nama kelas). Data sumber didukung: URUT, NISN, NIS, NAMA SISWA, L/P.
 -- Catatan: kolom student_code harus unik bila terisi. Bila sekolah memakai NIS/NISN yang sama
 -- di kelas berbeda, pastikan memang identitas siswa yang sama; sesuaikan indeks unik jika perlu.
