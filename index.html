@@ -72,19 +72,19 @@ body{font-size:16px;line-height:1.6}.panel h2{font-size:25px;line-height:1.3}.pa
 .journal-reminder{border-left:4px solid #d7a343;background:#fffefa}.journal-reminder .section-kicker{font-size:12px}.journal-reminder p,.journal-reminder #todayJournalStatus{font-size:15px;line-height:1.6}.journal-reminder h3{font-size:21px}
 
 /* Ringkasan presensi tersimpan: ringkas, rata tengah, nama dalam baris mendatar */
-.saved-attendance-top{display:grid;grid-template-columns:minmax(220px,1fr) minmax(0,2fr);gap:12px;align-items:stretch;margin-bottom:12px}
-.saved-attendance-message{margin:0!important;display:flex;flex-direction:column;justify-content:center}
-.saved-attendance-chips{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
-.saved-attendance-chip{min-width:0;border-radius:12px;padding:10px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:68px}
-.saved-attendance-chip strong{font-size:23px;line-height:1.1}
-.saved-attendance-chip span{font-size:12px;line-height:1.3;text-align:center}
-.saved-attendance-lists{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-items:start}
-.saved-attendance-list{min-width:0;margin:0!important;padding:12px!important}
-.saved-attendance-list h3{text-align:center;font-size:15px;margin:0 0 8px!important}
+.saved-attendance-top{display:flex;flex-direction:column;gap:12px;align-items:stretch;margin-bottom:16px;width:100%}
+.saved-attendance-message{margin:0!important;display:flex;flex-direction:column;justify-content:center;gap:4px;width:100%;padding:14px 16px!important;line-height:1.45}
+.saved-attendance-chips{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;width:100%;align-items:stretch}
+.saved-attendance-chip{box-sizing:border-box;min-width:0;width:100%;border-radius:12px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:76px;gap:5px}
+.saved-attendance-chip strong{display:block;font-size:25px;line-height:1.1;font-weight:800;text-align:center}
+.saved-attendance-chip span{display:block;font-size:13px;line-height:1.3;text-align:center;overflow-wrap:normal;word-break:normal}
+.saved-attendance-lists{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-items:start;width:100%}
+.saved-attendance-list{min-width:0;margin:0!important;padding:14px!important}
+.saved-attendance-list h3{text-align:left;font-size:15px;margin:0 0 10px!important;white-space:normal}
 .saved-attendance-list ul{margin:0;padding-left:20px}
-.saved-attendance-list li{font-size:12px;line-height:1.45;overflow-wrap:anywhere;margin:3px 0}
-@media(max-width:800px){.saved-attendance-top{grid-template-columns:1fr}.saved-attendance-chips{grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}.saved-attendance-chip{padding:8px 3px;min-height:60px}.saved-attendance-chip strong{font-size:20px}.saved-attendance-chip span{font-size:11px}.saved-attendance-lists{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:420px){.saved-attendance-lists{grid-template-columns:1fr}}
+.saved-attendance-list li{font-size:13px;line-height:1.5;overflow-wrap:anywhere;margin:4px 0}
+@media(max-width:800px){.saved-attendance-chips{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}.saved-attendance-chip{padding:10px 4px;min-height:68px}.saved-attendance-chip strong{font-size:21px}.saved-attendance-chip span{font-size:12px}.saved-attendance-lists{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:460px){.saved-attendance-chips{grid-template-columns:repeat(3,minmax(0,1fr))}.saved-attendance-lists{grid-template-columns:1fr}}
 
 </style></head>
 <body><main class="wrap">
