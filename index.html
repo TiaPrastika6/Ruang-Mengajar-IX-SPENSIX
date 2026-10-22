@@ -94,6 +94,22 @@ body{font-size:16px;line-height:1.6}.panel h2{font-size:25px;line-height:1.3}.pa
 #attendanceSummary .attendance-chip span{display:block;font-size:12px;line-height:1.25;white-space:normal;overflow-wrap:normal;word-break:normal;text-align:center}
 @media(max-width:760px){#attendanceSummary.attendance-summary{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}}
 @media(max-width:380px){#attendanceSummary.attendance-summary{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+
+/* FIX FINAL: hasil simpan tidak boleh mewarisi grid editor 6 kolom */
+#attendanceSummary:has(.saved-attendance-top){display:block!important;width:100%!important;margin:16px 0!important}
+#attendanceSummary .saved-attendance-top{display:grid!important;grid-template-columns:minmax(230px,0.9fr) minmax(0,2.1fr)!important;width:100%!important;gap:12px!important;align-items:stretch!important}
+#attendanceSummary .saved-attendance-message{min-width:0!important;width:100%!important;overflow-wrap:break-word}
+#attendanceSummary .saved-attendance-chips{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:8px!important;width:100%!important;min-width:0!important}
+#attendanceSummary .saved-attendance-chip{min-width:0!important;width:auto!important;min-height:76px!important;padding:10px 5px!important;display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;overflow:visible!important}
+#attendanceSummary .saved-attendance-chip strong{font-size:clamp(20px,2vw,28px)!important;line-height:1.15!important}
+#attendanceSummary .saved-attendance-chip span{font-size:12px!important;line-height:1.3!important;white-space:normal!important;word-break:normal!important;overflow-wrap:normal!important}
+#attendanceLists:has(.saved-attendance-lists){display:block!important;width:100%!important}
+#attendanceLists .saved-attendance-lists{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important;width:100%!important;align-items:start!important}
+#attendanceLists .saved-attendance-list{min-width:0!important;width:100%!important}
+#attendanceLists .saved-attendance-list li{overflow-wrap:break-word!important;word-break:normal!important;white-space:normal!important}
+@media(max-width:800px){#attendanceSummary .saved-attendance-top{grid-template-columns:1fr!important}#attendanceSummary .saved-attendance-chips{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:5px!important}#attendanceLists .saved-attendance-lists{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:420px){#attendanceSummary .saved-attendance-chips{grid-template-columns:repeat(3,minmax(0,1fr))!important}#attendanceLists .saved-attendance-lists{grid-template-columns:1fr!important}}
+
 </style></head>
 <body><main class="wrap">
 <header class="top"><div class="brand"><div class="logo">✦</div><div><h1>Ruang Mengajar</h1><p>Administrasi pembelajaran kelas IX</p></div></div><div class="row"><span id="who" class="muted small"></span><button id="logout" class="secondary hidden">Keluar</button></div></header>
