@@ -110,6 +110,106 @@ body{font-size:16px;line-height:1.6}.panel h2{font-size:25px;line-height:1.3}.pa
 .saved-attendance-list li{font-size:14px;line-height:1.5;overflow-wrap:break-word;word-break:normal;margin:3px 0}
 @media(max-width:800px){.attendance-summary{grid-template-columns:repeat(3,minmax(0,1fr))}.attendance-lists,.saved-attendance-lists{grid-template-columns:repeat(2,minmax(0,1fr))}.saved-attendance-top{grid-template-columns:1fr}.saved-attendance-chips{grid-template-columns:repeat(5,minmax(0,1fr))}}
 @media(max-width:520px){.attendance-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.attendance-lists,.saved-attendance-lists{grid-template-columns:1fr}.saved-attendance-chips{gap:5px}.saved-attendance-chip{padding:10px 3px}.saved-attendance-chip strong{font-size:21px}.saved-attendance-chip span{font-size:11px}.saved-attendance-message{font-size:14px}}
+
+/* PERBAIKAN FINAL: ringkasan setelah presensi disimpan */
+#attendanceSummary, #attendanceLists, #attendanceEditor { min-width:0; width:100%; }
+.saved-attendance-top {
+  display:grid !important;
+  grid-template-columns:minmax(220px, 0.9fr) minmax(0, 2.1fr) !important;
+  gap:12px !important;
+  align-items:stretch !important;
+  width:100%;
+}
+.saved-attendance-message {
+  min-width:0;
+  width:100%;
+  margin:0 !important;
+  padding:16px !important;
+  line-height:1.55;
+  overflow-wrap:anywhere;
+}
+.saved-attendance-message span { display:block; }
+.saved-attendance-chips {
+  min-width:0;
+  width:100%;
+  display:grid !important;
+  grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+  gap:8px !important;
+}
+.saved-attendance-chip {
+  min-width:0;
+  min-height:88px;
+  padding:12px 6px !important;
+  display:flex !important;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  text-align:center;
+}
+.saved-attendance-chip strong {
+  display:block;
+  font-size:clamp(20px,2vw,27px) !important;
+  line-height:1.15 !important;
+  margin:0 0 4px;
+}
+.saved-attendance-chip span {
+  display:block;
+  font-size:12px !important;
+  line-height:1.3 !important;
+  white-space:normal;
+  overflow-wrap:normal;
+  word-break:normal;
+}
+.saved-attendance-lists {
+  display:grid !important;
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  gap:12px !important;
+  align-items:start;
+  width:100%;
+}
+.saved-attendance-list {
+  min-width:0;
+  width:100%;
+  max-width:none;
+  margin:0 !important;
+  padding:14px !important;
+  overflow:visible !important;
+}
+.saved-attendance-list h3 {
+  margin:0 0 10px !important;
+  padding:0 0 9px;
+  border-bottom:1px solid var(--line);
+  font-size:15px;
+  line-height:1.35;
+  text-align:left;
+  overflow-wrap:normal;
+}
+.saved-attendance-list ul { margin:0; padding-left:20px; }
+.saved-attendance-list li {
+  padding:3px 0;
+  font-size:13px;
+  line-height:1.45;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+#attendanceLists > .row { display:flex; justify-content:flex-end; margin-top:16px; }
+#closeAttendanceResult { min-width:100px; }
+@media (max-width:1000px) {
+  .saved-attendance-lists { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+  .saved-attendance-top { grid-template-columns:1fr !important; }
+}
+@media (max-width:600px) {
+  .saved-attendance-chips { grid-template-columns:repeat(5,minmax(0,1fr)) !important; gap:5px !important; }
+  .saved-attendance-chip { min-height:72px; padding:8px 2px !important; }
+  .saved-attendance-chip strong { font-size:20px !important; }
+  .saved-attendance-chip span { font-size:10px !important; }
+  .saved-attendance-lists { grid-template-columns:1fr !important; }
+  .saved-attendance-list { padding:14px !important; }
+  .saved-attendance-list li { font-size:14px; }
+  .saved-attendance-message { font-size:14px; }
+}
 </style></head>
 <body><main class="wrap">
 <header class="top"><div class="brand"><div class="logo">✦</div><div><h1>Ruang Mengajar</h1><p>Administrasi pembelajaran kelas IX</p></div></div><div class="row"><span id="who" class="muted small"></span><button id="logout" class="secondary hidden">Keluar</button></div></header>
