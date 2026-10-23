@@ -71,174 +71,38 @@ body{font-size:16px;line-height:1.6}.panel h2{font-size:25px;line-height:1.3}.pa
 #panel-dashboard .workflow span{font-weight:500;font-size:14px}
 .journal-reminder{border-left:4px solid #d7a343;background:#fffefa}.journal-reminder .section-kicker{font-size:12px}.journal-reminder p,.journal-reminder #todayJournalStatus{font-size:15px;line-height:1.6}.journal-reminder h3{font-size:21px}
 
-/* Ringkasan presensi tersimpan: ringkas, rata tengah, nama dalam baris mendatar */
-.saved-attendance-top{display:grid;grid-template-columns:minmax(220px,1fr) minmax(0,2fr);gap:12px;align-items:stretch;margin-bottom:12px}
-.saved-attendance-message{margin:0!important;display:flex;flex-direction:column;justify-content:center}
-.saved-attendance-chips{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
-.saved-attendance-chip{min-width:0;border-radius:12px;padding:10px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:68px}
-.saved-attendance-chip strong{font-size:23px;line-height:1.1}
-.saved-attendance-chip span{font-size:12px;line-height:1.3;text-align:center}
-.saved-attendance-lists{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-items:start}
-.saved-attendance-list{min-width:0;margin:0!important;padding:12px!important}
-.saved-attendance-list h3{text-align:center;font-size:15px;margin:0 0 8px!important}
-.saved-attendance-list ul{margin:0;padding-left:20px}
-.saved-attendance-list li{font-size:12px;line-height:1.45;overflow-wrap:anywhere;margin:3px 0}
-@media(max-width:800px){.saved-attendance-top{grid-template-columns:1fr}.saved-attendance-chips{grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}.saved-attendance-chip{padding:8px 3px;min-height:60px}.saved-attendance-chip strong{font-size:20px}.saved-attendance-chip span{font-size:11px}.saved-attendance-lists{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:420px){.saved-attendance-lists{grid-template-columns:1fr}}
+/* FIX RINGKASAN PRESENSI - konsisten sebelum dan sesudah Simpan */
+#attendanceWorkspace{min-width:0;width:100%}
+#attendanceSummary.attendance-summary{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:8px!important;width:100%!important;min-width:0!important;margin:16px 0!important}
+#attendanceSummary .attendance-chip{box-sizing:border-box;min-width:0!important;width:100%;min-height:76px;padding:10px 5px!important;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid var(--line);border-radius:12px;background:#fff;gap:4px}
+#attendanceSummary .attendance-chip strong{font-size:clamp(18px,2vw,26px);line-height:1.15}
+#attendanceSummary .attendance-chip span{font-size:clamp(10px,1.1vw,13px);line-height:1.3;overflow-wrap:anywhere;text-align:center}
+#attendanceLists.attendance-lists{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-areas:"hadir sakit" "izin alpa" "belum belum"!important;align-items:start!important;gap:12px!important;width:100%!important;min-width:0!important;margin:12px 0!important}
+#attendanceLists .attendance-list{box-sizing:border-box;min-width:0!important;width:100%!important;max-width:none!important;max-height:none!important;overflow:visible!important;padding:14px!important;margin:0!important;border:1px solid var(--line);border-radius:14px;background:#fff}
+#attendanceLists .attendance-list:nth-child(1){grid-area:hadir}
+#attendanceLists .attendance-list:nth-child(2){grid-area:sakit}
+#attendanceLists .attendance-list:nth-child(3){grid-area:izin}
+#attendanceLists .attendance-list:nth-child(4){grid-area:alpa}
+#attendanceLists .attendance-list:nth-child(5){grid-area:belum}
+#attendanceLists .attendance-list h4{display:flex;align-items:center;gap:6px;flex-wrap:wrap;text-align:left;font-size:15px;margin:0 0 10px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+#attendanceLists .attendance-list ul{margin:0;padding-left:22px}
+#attendanceLists .attendance-list li{font-size:14px;line-height:1.5;white-space:normal;overflow-wrap:anywhere;word-break:normal;margin:3px 0}
+@media(max-width:760px){
+ #attendanceSummary.attendance-summary{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important}
+ #attendanceSummary .attendance-chip{min-height:66px;padding:8px 4px!important}
+ #attendanceSummary .attendance-chip strong{font-size:21px}
+ #attendanceSummary .attendance-chip span{font-size:11px}
+ #attendanceLists.attendance-lists{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-areas:"hadir sakit" "izin alpa" "belum belum"!important;gap:8px!important}
+ #attendanceLists .attendance-list{padding:10px!important}
+ #attendanceLists .attendance-list h4{font-size:13px}
+ #attendanceLists .attendance-list li{font-size:12px;line-height:1.45}
+}
+@media(max-width:360px){#attendanceLists.attendance-lists{grid-template-columns:minmax(0,1fr)!important;grid-template-areas:"hadir" "sakit" "izin" "alpa" "belum"!important}}
 
-
-/* Tata letak ringkasan presensi yang responsif */
-.attendance-summary{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:16px 0}
-.attendance-chip{min-width:0;text-align:center;padding:14px 8px;border:1px solid var(--line);border-radius:12px;background:#fbfcfb}
-.attendance-chip strong{display:block;font-size:24px;line-height:1.2;margin-bottom:4px}
-.attendance-chip span{display:block;font-size:13px;line-height:1.35;overflow-wrap:normal;word-break:normal}
-.attendance-lists{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start;margin:14px 0 20px}
-.attendance-list{min-width:0;max-height:none;overflow:visible;padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}
-.attendance-list h4{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-start;margin:0 0 10px;padding:0 0 10px;border-bottom:1px solid var(--line);font-size:15px}
-.attendance-list ul{margin:0;padding-left:22px}
-.attendance-list li{padding:3px 0;line-height:1.45;overflow-wrap:break-word;word-break:normal;white-space:normal}
-.saved-attendance-top{display:grid;grid-template-columns:minmax(220px,1fr) minmax(0,2fr);gap:12px;align-items:stretch;margin:14px 0}
-.saved-attendance-message{margin:0;display:flex;flex-direction:column;gap:4px}
-.saved-attendance-chips{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
-.saved-attendance-chip{min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:12px 6px;border-radius:12px}
-.saved-attendance-chip strong{font-size:24px;line-height:1.2}
-.saved-attendance-chip span{font-size:12px;line-height:1.35;overflow-wrap:normal;word-break:normal}
-.saved-attendance-lists{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
-.saved-attendance-list{min-width:0;margin:0!important;padding:16px!important}
-.saved-attendance-list h3{text-align:left;font-size:16px;margin:0 0 10px!important;padding-bottom:8px;border-bottom:1px solid var(--line)}
-.saved-attendance-list ul{margin:0;padding-left:22px}
-.saved-attendance-list li{font-size:14px;line-height:1.5;overflow-wrap:break-word;word-break:normal;margin:3px 0}
-@media(max-width:800px){.attendance-summary{grid-template-columns:repeat(3,minmax(0,1fr))}.attendance-lists,.saved-attendance-lists{grid-template-columns:repeat(2,minmax(0,1fr))}.saved-attendance-top{grid-template-columns:1fr}.saved-attendance-chips{grid-template-columns:repeat(5,minmax(0,1fr))}}
-@media(max-width:520px){.attendance-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.attendance-lists,.saved-attendance-lists{grid-template-columns:1fr}.saved-attendance-chips{gap:5px}.saved-attendance-chip{padding:10px 3px}.saved-attendance-chip strong{font-size:21px}.saved-attendance-chip span{font-size:11px}.saved-attendance-message{font-size:14px}}
-
-/* PERBAIKAN FINAL: ringkasan setelah presensi disimpan */
-#attendanceSummary, #attendanceLists, #attendanceEditor { min-width:0; width:100%; }
-.saved-attendance-top {
-  display:grid !important;
-  grid-template-columns:minmax(220px, 0.9fr) minmax(0, 2.1fr) !important;
-  gap:12px !important;
-  align-items:stretch !important;
-  width:100%;
-}
-.saved-attendance-message {
-  min-width:0;
-  width:100%;
-  margin:0 !important;
-  padding:16px !important;
-  line-height:1.55;
-  overflow-wrap:anywhere;
-}
-.saved-attendance-message span { display:block; }
-.saved-attendance-chips {
-  min-width:0;
-  width:100%;
-  display:grid !important;
-  grid-template-columns:repeat(5,minmax(0,1fr)) !important;
-  gap:8px !important;
-}
-.saved-attendance-chip {
-  min-width:0;
-  min-height:88px;
-  padding:12px 6px !important;
-  display:flex !important;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  border-radius:12px;
-  text-align:center;
-}
-.saved-attendance-chip strong {
-  display:block;
-  font-size:clamp(20px,2vw,27px) !important;
-  line-height:1.15 !important;
-  margin:0 0 4px;
-}
-.saved-attendance-chip span {
-  display:block;
-  font-size:12px !important;
-  line-height:1.3 !important;
-  white-space:normal;
-  overflow-wrap:normal;
-  word-break:normal;
-}
-.saved-attendance-lists {
-  display:grid !important;
-  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
-  gap:12px !important;
-  align-items:start;
-  width:100%;
-}
-.saved-attendance-list {
-  min-width:0;
-  width:100%;
-  max-width:none;
-  margin:0 !important;
-  padding:14px !important;
-  overflow:visible !important;
-}
-.saved-attendance-list h3 {
-  margin:0 0 10px !important;
-  padding:0 0 9px;
-  border-bottom:1px solid var(--line);
-  font-size:15px;
-  line-height:1.35;
-  text-align:left;
-  overflow-wrap:normal;
-}
-.saved-attendance-list ul { margin:0; padding-left:20px; }
-.saved-attendance-list li {
-  padding:3px 0;
-  font-size:13px;
-  line-height:1.45;
-  white-space:normal;
-  overflow-wrap:anywhere;
-  word-break:normal;
-}
-#attendanceLists > .row { display:flex; justify-content:flex-end; margin-top:16px; }
-#closeAttendanceResult { min-width:100px; }
-@media (max-width:1000px) {
-  .saved-attendance-lists { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
-  .saved-attendance-top { grid-template-columns:1fr !important; }
-}
-@media (max-width:600px) {
-  .saved-attendance-chips { grid-template-columns:repeat(5,minmax(0,1fr)) !important; gap:5px !important; }
-  .saved-attendance-chip { min-height:72px; padding:8px 2px !important; }
-  .saved-attendance-chip strong { font-size:20px !important; }
-  .saved-attendance-chip span { font-size:10px !important; }
-  .saved-attendance-lists { grid-template-columns:1fr !important; }
-  .saved-attendance-list { padding:14px !important; }
-  .saved-attendance-list li { font-size:14px; }
-  .saved-attendance-message { font-size:14px; }
-}
-
-/* FIX DEFINITIF: hasil setelah tombol Simpan presensi */
-#attendanceWorkspace { display:block; width:100%; min-width:0; }
-#attendanceSummary { display:block !important; width:100% !important; min-width:0 !important; margin:16px 0 12px !important; }
-#attendanceLists { display:block !important; width:100% !important; min-width:0 !important; margin:0 0 18px !important; }
-#attendanceSummary .saved-attendance-top { display:flex !important; flex-direction:column !important; align-items:stretch !important; gap:12px !important; width:100% !important; min-width:0 !important; margin:0 0 14px !important; }
-#attendanceSummary .saved-attendance-message { display:flex !important; width:100% !important; min-width:0 !important; padding:16px !important; margin:0 !important; gap:5px !important; }
-#attendanceSummary .saved-attendance-chips { display:grid !important; width:100% !important; min-width:0 !important; grid-template-columns:repeat(5,minmax(0,1fr)) !important; gap:8px !important; }
-#attendanceSummary .saved-attendance-chip { display:flex !important; width:auto !important; min-width:0 !important; min-height:78px !important; padding:10px 5px !important; align-items:center !important; justify-content:center !important; text-align:center !important; }
-#attendanceSummary .saved-attendance-chip strong { display:block !important; font-size:clamp(20px,2vw,28px) !important; line-height:1.15 !important; }
-#attendanceSummary .saved-attendance-chip span { display:block !important; font-size:12px !important; line-height:1.3 !important; white-space:normal !important; }
-#attendanceLists .saved-attendance-lists { display:grid !important; width:100% !important; min-width:0 !important; grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:12px !important; align-items:start !important; }
-#attendanceLists .saved-attendance-list { display:block !important; width:100% !important; min-width:0 !important; max-width:none !important; padding:16px !important; margin:0 !important; overflow:visible !important; }
-#attendanceLists .saved-attendance-list h3 { font-size:15px !important; text-align:left !important; white-space:normal !important; overflow-wrap:normal !important; }
-#attendanceLists .saved-attendance-list ul { padding-left:22px !important; margin:0 !important; }
-#attendanceLists .saved-attendance-list li { font-size:14px !important; line-height:1.5 !important; white-space:normal !important; overflow-wrap:break-word !important; word-break:normal !important; }
-#attendanceLists > .row { display:flex !important; width:100% !important; justify-content:flex-end !important; margin-top:14px !important; }
-@media(max-width:760px) {
- #attendanceSummary .saved-attendance-chips { grid-template-columns:repeat(3,minmax(0,1fr)) !important; }
- #attendanceLists .saved-attendance-lists { grid-template-columns:1fr !important; }
- #attendanceSummary .saved-attendance-chip { min-height:68px !important; }
-}
-@media(max-width:420px) {
- #attendanceSummary .saved-attendance-chips { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
-}
 </style></head>
 <body><main class="wrap">
 <header class="top"><div class="brand"><div class="logo">✦</div><div><h1>Ruang Mengajar</h1><p>Administrasi pembelajaran kelas IX</p></div></div><div class="row"><span id="who" class="muted small"></span><button id="logout" class="secondary hidden">Keluar</button></div></header>
-<section id="setup" class="card"><h2>Hubungkan database</h2><p>Masukkan URL dan anon/publishable key proyek Supabase. Informasi ini disimpan di browser ini saja. Jangan pernah memasukkan service-role key.</p><div class="field"><label>Supabase Project URL</label><input id="sburl" placeholder="https://xxxx.supabase.co"></div><div class="field"><label>Publishable / anon key</label><input id="sbkey" placeholder="eyJ..."></div><button id="saveconfig">Simpan konfigurasi</button><p class="muted small">Sebelum login, jalankan schema.sql pada SQL Editor Supabase dan buat akun guru di Authentication → Users.</p><div id="setupmsg" class="hidden"></div></section>
+<section id="setup" class="card hidden"><h2>Hubungkan database</h2><p>Masukkan URL dan anon/publishable key proyek Supabase. Informasi ini disimpan di browser ini saja. Jangan pernah memasukkan service-role key.</p><div class="field"><label>Supabase Project URL</label><input id="sburl" placeholder="https://xxxx.supabase.co"></div><div class="field"><label>Publishable / anon key</label><input id="sbkey" placeholder="eyJ..."></div><button id="saveconfig">Simpan konfigurasi</button><p class="muted small">Sebelum login, jalankan schema.sql pada SQL Editor Supabase dan buat akun guru di Authentication → Users.</p></section>
 <section id="login" class="card login hidden"><h2>Masuk ke Ruang Mengajar</h2><p class="muted">Gunakan akun guru yang sudah dibuat di Supabase.</p><form id="loginform"><div class="field"><label>Email</label><input id="email" type="email" required autocomplete="username"></div><div class="field"><label>Kata sandi</label><input id="password" type="password" required autocomplete="current-password"></div><button type="submit" style="width:100%">Masuk</button></form><div id="loginmsg"></div></section>
 <section id="app" class="hidden">
 
@@ -282,13 +146,13 @@ body{font-size:16px;line-height:1.6}.panel h2{font-size:25px;line-height:1.3}.pa
 const $=id=>document.getElementById(id);let sb=null,user=null,students=[],classes=[],lessons=[],assessments=[],attendanceDraft=[],gradeDraft=[],pendingWorkbook=null;
 function today(){return new Date().toLocaleDateString('en-CA')}
 let toastTimer=null;function msg(text,type='ok',target='msg'){const el=$(target);if(target!=='msg'){el.className='notice '+(type==='err'?'err':type==='ok'?'ok':'');el.textContent=text;el.classList.remove('hidden');return}clearTimeout(toastTimer);el.className='notice toast '+(type==='err'?'err':type==='ok'?'ok':'');el.textContent=text;el.classList.remove('hidden');toastTimer=setTimeout(()=>{el.classList.add('hidden');el.textContent='';},4000)}
-window.addEventListener('error',e=>{console.error('Ruang Mengajar error:',e.error||e.message);const s=$('setup');if(s&&s.classList.contains('hidden')){const l=$('login');if(l&&l.classList.contains('hidden')){s.classList.remove('hidden');const m=$('setupmsg');if(m){m.className='notice err';m.textContent='Aplikasi mengalami kesalahan saat dimuat. Periksa koneksi dan muat ulang halaman.'}}}});function clearMsg(target='msg'){const e=$(target);e.className='hidden';e.textContent=''}
+function clearMsg(target='msg'){const e=$(target);e.className='hidden';e.textContent=''}
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function show(id){$(id).classList.remove('hidden')}function hide(id){$(id).classList.add('hidden')}
 function setTab(tab){document.querySelectorAll('.panel').forEach(e=>e.classList.add('hidden'));$('panel-'+tab).classList.remove('hidden');document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));document.querySelectorAll('[data-navgroup]').forEach(g=>g.classList.toggle('collapsed',!g.querySelector(`[data-tab="${tab}"]`)));if(tab==='dashboard'){window.scrollTo({top:0,behavior:'smooth'});renderDashboardSchedule()} }
 document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));document.querySelectorAll('[data-parent]').forEach(b=>b.onclick=()=>{let g=b.closest('[data-navgroup]');g.classList.toggle('collapsed')});document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>setTab(b.dataset.go));document.querySelectorAll('[data-back]').forEach(b=>b.onclick=()=>{if(history.length>1){setTab('dashboard')}else setTab('dashboard')});
 function config(){return {url:localStorage.getItem('rmix_url'),key:localStorage.getItem('rmix_key')}}
-async function initClient(){let c=config();if(!c.url||!c.key){show('setup');hide('login');hide('app');return}try{if(!window.supabase||typeof window.supabase.createClient!=='function'){show('setup');hide('login');hide('app');msg('Pustaka Supabase gagal dimuat. Periksa koneksi internet atau coba muat ulang halaman.','err','setupmsg');return}sb=window.supabase.createClient(c.url,c.key);hide('setup');const {data,error}=await sb.auth.getSession();if(error)throw error;if(data.session){user=data.session.user;await startApp()}else{show('login');hide('app')}}catch(e){show('login');hide('app');msg('Aplikasi gagal dimuat: '+(e?.message||'kesalahan tidak diketahui')+'. Muat ulang halaman; jika berulang, kirim pesan ini untuk diperiksa.','err','loginmsg');console.error('Ruang Mengajar init error:',e)}}
+function initClient(){let c=config();if(!c.url||!c.key){show('setup');hide('login');hide('app');return}sb=window.supabase.createClient(c.url,c.key);hide('setup');sb.auth.getSession().then(({data})=>{if(data.session){user=data.session.user;startApp()}else{show('login');hide('app')}})}
 $('saveconfig').onclick=()=>{let url=$('sburl').value.trim(),key=$('sbkey').value.trim();if(!url.startsWith('https://')||!key){msg('URL dan publishable/anon key harus diisi.','err','loginmsg');return}localStorage.setItem('rmix_url',url);localStorage.setItem('rmix_key',key);initClient()};
 $('loginform').onsubmit=async e=>{e.preventDefault();$('loginmsg').textContent='';let {data,error}=await sb.auth.signInWithPassword({email:$('email').value,password:$('password').value});if(error){$('loginmsg').textContent=error.message;return}user=data.user;startApp()};
 $('logout').onclick=async()=>{await sb.auth.signOut();location.reload()};
@@ -331,9 +195,9 @@ function refreshAttendanceSchedule(){let date=$('attDate').value,cname=className
 function updateLateReasonVisibility(){let slot=$('attSlot')?.value,date=$('attDate')?.value,cname=className($('attClass')?.value),item=teachingSchedule.find(x=>x.label===slot&&x.cls.toLowerCase()===cname.toLowerCase());let late=false;if(item&&date){let now=new Date(),todayStr=today(),dayNow=now.getDay(),minutes=now.getHours()*60+now.getMinutes(),end=item.end.split(':').map(Number),endMin=end[0]*60+end[1];late=(date<todayStr)||(date===todayStr&&(dayNow!==item.day||minutes>endMin));}else if(slot==='manual')late=true;let required=late||slot==='manual'||!item;$('lateReasonBox').classList.toggle('hidden',!required);return {required,item,late}}
 $('attDate').addEventListener('change',refreshAttendanceSchedule);$('attClass').addEventListener('change',refreshAttendanceSchedule);$('attSlot').addEventListener('change',updateLateReasonVisibility);
 function renderAttendanceSummary(){let groups={'Hadir':[],'Sakit':[],'Izin':[],'Alpa':[],'Belum diisi':[]};for(let s of students.filter(s=>s.class_id===$('attClass').value)){let v=document.querySelector(`[data-status="${s.id}"]`)?.value||attendanceDraft.find(x=>x.student_id===s.id)?.status||'Belum diisi';(groups[v]||groups['Belum diisi']).push(`${s.roll_number??''} ${s.name}`.trim())}let total=students.filter(s=>s.class_id===$('attClass').value).length;$('attendanceSummary').innerHTML=`${Object.entries(groups).map(([st,names])=>`<div class="attendance-chip"><strong>${names.length}</strong><span>${st}</span></div>`).join('')}<div class="attendance-chip"><strong>${total}</strong><span>Total siswa</span></div>`;$('attendanceLists').innerHTML=Object.entries(groups).map(([st,names])=>`<div class="attendance-list"><h4><span class="status-badge status-${st==='Belum diisi'?'belum':st.toLowerCase()}">${st}</span> · ${names.length} siswa</h4>${names.length?`<ul>${names.map(n=>`<li>${esc(n)}</li>`).join('')}</ul>`:'<p class="muted small">Tidak ada siswa.</p>'}</div>`).join('')}
-$('loadAttendance').onclick=async()=>{let cid=$('attClass').value;if(!cid){msg('Pilih kelas terlebih dahulu.','err');return}let policy=updateLateReasonVisibility();if(!$('attSlot').value){msg('Pilih jam pelajaran atau Di luar jadwal / kegiatan khusus.','err');return}if(policy.required&&!$('lateReason').value.trim()){msg('Alasan wajib diisi untuk presensi di luar jadwal atau setelah jam pelajaran.','err');$('lateReason').focus();return}let {data:old,error}=await sb.from('attendance_records').select('student_id,status,notes,attendance_sessions!inner(id,session_date,class_id,meeting_label)').eq('attendance_sessions.session_date',$('attDate').value).eq('attendance_sessions.class_id',cid).eq('attendance_sessions.meeting_label',$('attSlot').value);if(error){msg(error.message,'err');return}attendanceDraft=students.filter(s=>s.class_id===cid).map(s=>({student_id:s.id,status:old.find(o=>o.student_id===s.id)?.status||'Belum diisi',notes:old.find(o=>o.student_id===s.id)?.notes||''}));$('attendanceWorkspace').classList.remove('hidden');$('attendanceEditor').innerHTML=attendanceDraft.length?`<div class="attendance-list-toolbar"><div class="field attendance-search-field"><label for="attendanceStudentSearch">Cari siswa</label><input id="attendanceStudentSearch" type="search" placeholder="Ketik nama atau nomor absen..."></div><div id="attendanceToolbarActions" class="attendance-toolbar-actions"></div></div><p class="muted small" style="margin:0 0 10px">Ketik nama untuk menyaring daftar; status siswa lain tetap tersimpan saat disimpan.</p><div class="tablewrap"><table id="attendanceStudentTable"><thead><tr><th>No. absen</th><th>Nama siswa</th><th>Status kehadiran</th><th>Catatan</th></tr></thead><tbody>${students.filter(s=>s.class_id===cid).slice().sort((a,b)=>(Number(a.roll_number)||9999)-(Number(b.roll_number)||9999)||a.name.localeCompare(b.name)).map((s,i)=>{let a=attendanceDraft.find(x=>x.student_id===s.id);return `<tr><td>${s.roll_number??(i+1)}</td><td>${esc(s.name)}</td><td><select class="status-select" data-status="${s.id}">${['Belum diisi','Hadir','Sakit','Izin','Alpa'].map(v=>`<option ${a.status===v?'selected':''}>${v}</option>`).join('')}</select></td><td><input data-attnote="${s.id}" value="${esc(a.notes)}" placeholder="Opsional"></td></tr>`}).join('')}</tbody></table></div>`:'<div class="empty">Belum ada siswa aktif di kelas ini.</div>';let allPresentBtn=$('allPresent');const toolbarActions=$('attendanceToolbarActions');if(!allPresentBtn&&toolbarActions){allPresentBtn=document.createElement('button');allPresentBtn.id='allPresent';allPresentBtn.type='button';allPresentBtn.textContent='✓ Tandai semua hadir';}if(allPresentBtn&&toolbarActions){toolbarActions.appendChild(allPresentBtn);allPresentBtn.onclick=()=>{document.querySelectorAll('#attendanceStudentTable [data-status]').forEach(el=>{el.value='Hadir'});renderAttendanceSummary()};}document.querySelectorAll('[data-status]').forEach(el=>el.addEventListener('change',renderAttendanceSummary));$('attendanceStudentSearch')?.addEventListener('input',()=>{let q=$('attendanceStudentSearch').value.trim().toLocaleLowerCase('id');document.querySelectorAll('#attendanceStudentTable tbody tr').forEach(tr=>tr.classList.toggle('hidden',!tr.textContent.toLocaleLowerCase('id').includes(q)))});renderAttendanceSummary()};
-// Tombol Tandai semua hadir dipasang setelah toolbar presensi dirender.
-$('saveAttendance').onclick=async()=>{let cid=$('attClass').value,date=$('attDate').value,policy=updateLateReasonVisibility();if(!cid||!date||!attendanceDraft.length){msg('Tampilkan daftar siswa terlebih dahulu.','err');return}if(!$('attSlot').value){msg('Pilih jam pelajaran terlebih dahulu.','err');return}if(policy.required&&!$('lateReason').value.trim()){msg('Alasan wajib diisi untuk presensi di luar jadwal atau setelah jam pelajaran.','err');$('lateReason').focus();return}try{let found=await sb.from('attendance_sessions').select('*').eq('class_id',cid).eq('session_date',date).eq('meeting_label',$('attSlot').value).maybeSingle();if(found.error)throw found.error;let session=found.data;if(!session){let r=await sb.from('attendance_sessions').insert({class_id:cid,session_date:date,meeting_label:$('attSlot').value,late_reason:policy.required?$('lateReason').value.trim():null,created_by:user.id}).select().single();if(r.error)throw r.error;session=r.data}else{let u=await sb.from('attendance_sessions').update({meeting_label:$('attSlot').value,late_reason:policy.required?$('lateReason').value.trim():null,created_by:user.id}).eq('id',session.id);if(u.error)throw u.error}let saved=0;for(let g of attendanceDraft){let status=document.querySelector(`[data-status="${g.student_id}"]`)?.value||'Belum diisi';if(status==='Belum diisi')continue;let notes=document.querySelector(`[data-attnote="${g.student_id}"]`)?.value||null;let r=await sb.from('attendance_records').upsert({session_id:session.id,student_id:g.student_id,status,notes,marked_by:user.id},{onConflict:'session_id,student_id'});if(r.error)throw r.error;saved++}await loadAttendanceHistory();const finalRows=attendanceDraft.map(g=>{const student=students.find(s=>s.id===g.student_id);const status=document.querySelector(`[data-status=\"${g.student_id}\"]`)?.value||g.status||'Belum diisi';return {name:student?.name||'Siswa',roll:student?.roll_number,status}});const statusOrder=['Hadir','Izin','Sakit','Alpa','Belum diisi'];const statusColors={Hadir:'#e5f5e9',Izin:'#fff7df',Sakit:'#eaf3ff',Alpa:'#fff0ef','Belum diisi':'#f0f2f1'};$('attendanceSummary').innerHTML=`<div class="saved-attendance-top"><div class="notice ok saved-attendance-message"><strong>Presensi berhasil disimpan.</strong><span>${esc(className(cid))} · ${esc(date)} · ${esc($('attSlot').value)}</span><span>${saved} catatan kehadiran tersimpan.</span></div><div class="saved-attendance-chips">${statusOrder.map(st=>`<div class="saved-attendance-chip" style="background:${statusColors[st]}"><strong>${finalRows.filter(x=>x.status===st).length}</strong><span>${st}</span></div>`).join('')}</div></div>`;$('attendanceLists').innerHTML=`<div class="saved-attendance-lists">${statusOrder.map(st=>{const list=finalRows.filter(x=>x.status===st);return list.length?`<div class="card saved-attendance-list"><h3>${st} (${list.length})</h3><ul>${list.map(x=>`<li>${x.roll!=null?esc(x.roll)+'. ':''}${esc(x.name)}</li>`).join('')}</ul></div>`:''}).join('')}</div><div class="row" style="justify-content:flex-end;margin-top:14px"><button id="closeAttendanceResult" type="button">Tutup</button></div>`;$('attendanceEditor').innerHTML='';$('closeAttendanceResult').onclick=()=>{$('attendanceWorkspace').classList.add('hidden');$('attendanceSummary').innerHTML='';$('attendanceLists').innerHTML='';$('attendanceEditor').innerHTML='';};msg('Presensi tersimpan. Periksa ringkasan status siswa, lalu tekan Tutup untuk kembali ke riwayat presensi.') }catch(e){msg(e.message,'err')}};
+$('loadAttendance').onclick=async()=>{let cid=$('attClass').value;if(!cid){msg('Pilih kelas terlebih dahulu.','err');return}let policy=updateLateReasonVisibility();if(!$('attSlot').value){msg('Pilih jam pelajaran atau Di luar jadwal / kegiatan khusus.','err');return}if(policy.required&&!$('lateReason').value.trim()){msg('Alasan wajib diisi untuk presensi di luar jadwal atau setelah jam pelajaran.','err');$('lateReason').focus();return}let {data:old,error}=await sb.from('attendance_records').select('student_id,status,notes,attendance_sessions!inner(id,session_date,class_id,meeting_label)').eq('attendance_sessions.session_date',$('attDate').value).eq('attendance_sessions.class_id',cid).eq('attendance_sessions.meeting_label',$('attSlot').value);if(error){msg(error.message,'err');return}attendanceDraft=students.filter(s=>s.class_id===cid).map(s=>({student_id:s.id,status:old.find(o=>o.student_id===s.id)?.status||'Belum diisi',notes:old.find(o=>o.student_id===s.id)?.notes||''}));$('attendanceWorkspace').classList.remove('hidden');$('attendanceEditor').innerHTML=attendanceDraft.length?`<div class="attendance-list-toolbar"><div class="field attendance-search-field"><label for="attendanceStudentSearch">Cari siswa</label><input id="attendanceStudentSearch" type="search" placeholder="Ketik nama atau nomor absen..."></div><div id="attendanceToolbarActions" class="attendance-toolbar-actions"></div></div><p class="muted small" style="margin:0 0 10px">Ketik nama untuk menyaring daftar; status siswa lain tetap tersimpan saat disimpan.</p><div class="tablewrap"><table id="attendanceStudentTable"><thead><tr><th>No. absen</th><th>Nama siswa</th><th>Status kehadiran</th><th>Catatan</th></tr></thead><tbody>${students.filter(s=>s.class_id===cid).slice().sort((a,b)=>(Number(a.roll_number)||9999)-(Number(b.roll_number)||9999)||a.name.localeCompare(b.name)).map((s,i)=>{let a=attendanceDraft.find(x=>x.student_id===s.id);return `<tr><td>${s.roll_number??(i+1)}</td><td>${esc(s.name)}</td><td><select class="status-select" data-status="${s.id}">${['Belum diisi','Hadir','Sakit','Izin','Alpa'].map(v=>`<option ${a.status===v?'selected':''}>${v}</option>`).join('')}</select></td><td><input data-attnote="${s.id}" value="${esc(a.notes)}" placeholder="Opsional"></td></tr>`}).join('')}</tbody></table></div>`:'<div class="empty">Belum ada siswa aktif di kelas ini.</div>';let allPresentBtn=$('allPresent');if(allPresentBtn)$('attendanceToolbarActions')?.appendChild(allPresentBtn);document.querySelectorAll('[data-status]').forEach(el=>el.addEventListener('change',renderAttendanceSummary));$('attendanceStudentSearch')?.addEventListener('input',()=>{let q=$('attendanceStudentSearch').value.trim().toLocaleLowerCase('id');document.querySelectorAll('#attendanceStudentTable tbody tr').forEach(tr=>tr.classList.toggle('hidden',!tr.textContent.toLocaleLowerCase('id').includes(q)))});renderAttendanceSummary()};
+$('allPresent').onclick=()=>{document.querySelectorAll('[data-status]').forEach(s=>s.value='Hadir');renderAttendanceSummary()};
+$('saveAttendance').onclick=async()=>{let cid=$('attClass').value,date=$('attDate').value,policy=updateLateReasonVisibility();if(!cid||!date||!attendanceDraft.length){msg('Tampilkan daftar siswa terlebih dahulu.','err');return}if(!$('attSlot').value){msg('Pilih jam pelajaran terlebih dahulu.','err');return}if(policy.required&&!$('lateReason').value.trim()){msg('Alasan wajib diisi untuk presensi di luar jadwal atau setelah jam pelajaran.','err');$('lateReason').focus();return}try{let found=await sb.from('attendance_sessions').select('*').eq('class_id',cid).eq('session_date',date).eq('meeting_label',$('attSlot').value).maybeSingle();if(found.error)throw found.error;let session=found.data;if(!session){let r=await sb.from('attendance_sessions').insert({class_id:cid,session_date:date,meeting_label:$('attSlot').value,late_reason:policy.required?$('lateReason').value.trim():null,created_by:user.id}).select().single();if(r.error)throw r.error;session=r.data}else{let u=await sb.from('attendance_sessions').update({meeting_label:$('attSlot').value,late_reason:policy.required?$('lateReason').value.trim():null,created_by:user.id}).eq('id',session.id);if(u.error)throw u.error}let saved=0;for(let g of attendanceDraft){let status=document.querySelector(`[data-status="${g.student_id}"]`)?.value||'Belum diisi';if(status==='Belum diisi')continue;let notes=document.querySelector(`[data-attnote="${g.student_id}"]`)?.value||null;let r=await sb.from('attendance_records').upsert({session_id:session.id,student_id:g.student_id,status,notes,marked_by:user.id},{onConflict:'session_id,student_id'});if(r.error)throw r.error;saved++}await loadAttendanceHistory();$('attendanceWorkspace').classList.add('hidden');$('attendanceEditor').innerHTML='';$('attendanceSummary').innerHTML='';$('attendanceLists').innerHTML='';msg('Berhasil! Presensi tersimpan untuk '+saved+' siswa. '+(policy.required?'Alasan keterlambatan/perubahan jadwal juga tersimpan. ':'')+'Form presensi ditutup. Siswa Belum diisi tidak dihitung sebagai Alpa.') }catch(e){msg(e.message,'err')}};
 async function loadAttendanceHistory(){try{let {data,error}=await sb.from('attendance_sessions').select('id,session_date,meeting_label,class_id,late_reason,created_at').order('session_date',{ascending:false}).limit(100);if(error)throw error;$('attendanceHistory').innerHTML=data.length?`<table><thead><tr><th>Tanggal</th><th>Kelas</th><th>Jam / sesi</th><th>Alasan</th><th>Aksi</th></tr></thead><tbody>${data.map(x=>`<tr><td>${esc(x.session_date)}</td><td>${esc(className(x.class_id))}</td><td>${esc(x.meeting_label||'—')}</td><td>${esc(x.late_reason||'—')}</td><td><div class="table-actions"><button class="secondary" onclick="editAttendanceSession('${x.id}')">Edit / koreksi</button><button class="danger" onclick="deleteAttendanceSession('${x.id}')">Hapus</button></div></td></tr>`).join('')}</tbody></table>`:'<div class="empty">Belum ada riwayat presensi.</div>'}catch(e){msg('Riwayat presensi gagal dimuat: '+e.message,'err')}}
 window.editAttendanceSession=async id=>{try{let {data:sess,error}=await sb.from('attendance_sessions').select('*').eq('id',id).single();if(error)throw error;$('attClass').value=sess.class_id;$('attDate').value=sess.session_date;refreshAttendanceSchedule();if(![...$('attSlot').options].some(o=>o.value===sess.meeting_label)){let opt=document.createElement('option');opt.value=sess.meeting_label;opt.textContent=sess.meeting_label+' — sesi tersimpan';$('attSlot').appendChild(opt)}$('attSlot').value=sess.meeting_label||'manual';$('lateReason').value=sess.late_reason||'';updateLateReasonVisibility();$('loadAttendance').click();setTimeout(()=>{msg('Sesi dimuat untuk koreksi. Periksa status lalu tekan Simpan presensi.');$('attendanceEditor').scrollIntoView({behavior:'smooth',block:'center'})},350)}catch(e){msg(e.message,'err')}};
 window.deleteAttendanceSession=async id=>{if(!confirm('Hapus sesi presensi ini beserta seluruh status siswa di dalamnya? Tindakan ini tidak dapat dibatalkan.'))return;try{let {error}=await sb.from('attendance_sessions').delete().eq('id',id);if(error)throw error;await loadAttendanceHistory();msg('Sesi presensi berhasil dihapus.')}catch(e){msg('Gagal menghapus presensi: '+e.message,'err')}};
