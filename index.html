@@ -86,6 +86,30 @@ body{font-size:16px;line-height:1.6}.panel h2{font-size:25px;line-height:1.3}.pa
 @media(max-width:800px){.saved-attendance-top{grid-template-columns:1fr}.saved-attendance-chips{grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}.saved-attendance-chip{padding:8px 3px;min-height:60px}.saved-attendance-chip strong{font-size:20px}.saved-attendance-chip span{font-size:11px}.saved-attendance-lists{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:420px){.saved-attendance-lists{grid-template-columns:1fr}}
 
+
+/* Tata letak ringkasan presensi yang responsif */
+.attendance-summary{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:16px 0}
+.attendance-chip{min-width:0;text-align:center;padding:14px 8px;border:1px solid var(--line);border-radius:12px;background:#fbfcfb}
+.attendance-chip strong{display:block;font-size:24px;line-height:1.2;margin-bottom:4px}
+.attendance-chip span{display:block;font-size:13px;line-height:1.35;overflow-wrap:normal;word-break:normal}
+.attendance-lists{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start;margin:14px 0 20px}
+.attendance-list{min-width:0;max-height:none;overflow:visible;padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.attendance-list h4{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-start;margin:0 0 10px;padding:0 0 10px;border-bottom:1px solid var(--line);font-size:15px}
+.attendance-list ul{margin:0;padding-left:22px}
+.attendance-list li{padding:3px 0;line-height:1.45;overflow-wrap:break-word;word-break:normal;white-space:normal}
+.saved-attendance-top{display:grid;grid-template-columns:minmax(220px,1fr) minmax(0,2fr);gap:12px;align-items:stretch;margin:14px 0}
+.saved-attendance-message{margin:0;display:flex;flex-direction:column;gap:4px}
+.saved-attendance-chips{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.saved-attendance-chip{min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:12px 6px;border-radius:12px}
+.saved-attendance-chip strong{font-size:24px;line-height:1.2}
+.saved-attendance-chip span{font-size:12px;line-height:1.35;overflow-wrap:normal;word-break:normal}
+.saved-attendance-lists{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
+.saved-attendance-list{min-width:0;margin:0!important;padding:16px!important}
+.saved-attendance-list h3{text-align:left;font-size:16px;margin:0 0 10px!important;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.saved-attendance-list ul{margin:0;padding-left:22px}
+.saved-attendance-list li{font-size:14px;line-height:1.5;overflow-wrap:break-word;word-break:normal;margin:3px 0}
+@media(max-width:800px){.attendance-summary{grid-template-columns:repeat(3,minmax(0,1fr))}.attendance-lists,.saved-attendance-lists{grid-template-columns:repeat(2,minmax(0,1fr))}.saved-attendance-top{grid-template-columns:1fr}.saved-attendance-chips{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media(max-width:520px){.attendance-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.attendance-lists,.saved-attendance-lists{grid-template-columns:1fr}.saved-attendance-chips{gap:5px}.saved-attendance-chip{padding:10px 3px}.saved-attendance-chip strong{font-size:21px}.saved-attendance-chip span{font-size:11px}.saved-attendance-message{font-size:14px}}
 </style></head>
 <body><main class="wrap">
 <header class="top"><div class="brand"><div class="logo">✦</div><div><h1>Ruang Mengajar</h1><p>Administrasi pembelajaran kelas IX</p></div></div><div class="row"><span id="who" class="muted small"></span><button id="logout" class="secondary hidden">Keluar</button></div></header>
@@ -207,39 +231,3 @@ $('reportOutput').innerHTML=`<div class="grid">${summary.map(x=>`<div class="sta
 }catch(e){msg(e.message,'err')}};$('exportReport').onclick=()=>{if(!window.reportData){msg('Tampilkan rekap terlebih dahulu.','err');return}let wb=XLSX.utils.book_new();let a=window.reportData.attendance.map(x=>({Tanggal:x.attendance_sessions.session_date,Kelas:className(x.attendance_sessions.class_id),Siswa:students.find(s=>s.id===x.student_id)?.name||'',Status:x.status}));let g=window.reportData.grades.map(x=>({Penilaian:x.assessments.title,Tanggal:x.assessments.assessment_date,Kelas:className(x.assessments.class_id),Siswa:students.find(s=>s.id===x.student_id)?.name||'',Nilai:x.score}));XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(a),'Presensi');XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(g),'Nilai');if(window.reportData.students)XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(window.reportData.students.map(({id,...r})=>r)),'Rekap per Siswa');XLSX.writeFile(wb,'Rekap_Ruang_Mengajar.xlsx')};
 initClient();
 </script></body></html>
-
-
-/* Final polish: daftar nama presensi lebih seimbang dan mudah dibaca */
-.attendance-lists{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  align-items:start;
-  gap:12px;
-  margin:14px 0 20px;
-}
-.attendance-list{
-  min-width:0;
-  max-height:none;
-  overflow:visible;
-  padding:16px;
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:#fff;
-}
-.attendance-list h4{
-  justify-content:flex-start;
-  margin:0 0 10px;
-  padding:0 0 10px;
-  border-bottom:1px solid var(--line);
-  font-size:15px;
-}
-.attendance-list ul{margin:0;padding-left:20px}
-.attendance-list li{
-  padding:3px 0;
-  line-height:1.45;
-  overflow-wrap:break-word;
-  word-break:normal;
-  white-space:normal;
-}
-@media(max-width:1000px){.attendance-lists{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:600px){.attendance-lists{grid-template-columns:1fr}.attendance-list{padding:14px}}
